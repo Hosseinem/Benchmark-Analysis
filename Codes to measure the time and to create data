@@ -1,0 +1,223 @@
+
+#This function takes two integer as "maxlength" and "step"
+#generates a list of lists with random integers and different lengths starting with length 10 and increasing with "step" numbers and going on up to "maxlength"
+def randomlst(maxlength,step):
+    lists = []
+    for Len in range(10,maxlength,step):
+        lst = []
+        for n in range(Len):
+            lst.append(random.randint(0, 100))
+        lists.append(lst)
+    return lists
+
+
+#This function takes a class name "Class' and a list of random lists "lists" and an integer "repetition"
+#It measures the time required to use 3 methods of the "Class" for the random "lists" and takes an average by doing the process "repetition" times
+#You can choose not to measure minimum and maximum by assigning it to False
+#You can get the answer in milliseconds by assigning msec=True
+def measure_time(Class,lists,repetition,getmin=True,getmax=True,msec=False):
+    Case, Result, length, add_result, get_max_result, get_min_result = Class(), [], [], [], [], []
+    #measure the time for each random list
+    for List in lists:
+        #Keeping track of the length of random lists
+        length.append(len(List))
+        add_speed, get_min_speed, get_max_speed = 0, 0, 0
+        #repeating the process to take an average
+        for Repeat in range(repetition):
+            #taking each element and use the methods add, get_min and get_max
+            for num in List:
+                start = time.time()
+                Case.add(num)
+                add_speed += time.time() - start
+                if getmin:
+                    start = time.time()
+                    Case.get_min()
+                    get_min_speed += time.time() - start
+                if getmax:
+                    start = time.time()
+                    Case.get_max()
+                    get_max_speed += time.time() - start
+        #devide the total time by repetition time to get the average
+        add_speed /= repetition
+        get_min_speed /= repetition
+        get_max_speed /= repetition
+        #save timing records inside a list to keep track
+        if msec:
+            add_speed*=1000
+            get_min_speed*=1000
+            get_max_speed*=1000
+        add_result.append(add_speed)
+        if getmin:
+            get_min_result.append(get_min_speed)
+        if getmax:
+            get_max_result.append(get_max_speed)
+    #adding the label of the respective method to the list of timings
+    add_result.append('add')
+    if getmin:
+        get_min_result.append('get_min')
+    if getmax:
+        get_max_result.append('get_max')
+    #generate a final list including all the timings
+    Result.append(add_result)
+    if getmin:
+        Result.append(get_min_result)
+    if getmax:
+        Result.append(get_max_result)
+    #retruns a list of 2 lists
+    #first list has 3 lists including the times for each method
+    #second list includes the length of the Random lists
+    return length, Result
+
+import matplotlib.pyplot as plt
+
+#This function takes x and y and generates plots with respective names in one plot
+def drawplot(xlabels,ylabels,Classname,msec=False,log=False):
+    #selecting each method's records and taking out the label
+    for yax in ylabels:
+        label = yax[-1]
+        yax.pop()
+        plt.plot(xlabels, yax, label=label)
+        yax.append(label)
+    plt.legend()
+    plt.xlabel("length of inserted random lists")
+    #Changing the second to millisecond if necessary
+    if msec:
+        plt.ylabel("Execution time (msec)")
+    else:
+        plt.ylabel("Execution time (sec)")
+    #Writing the x axis in logarithms if necessary
+    if log:
+        plt.xscale('log')
+    plt.title("Performance of "+Classname)
+    plt.show()
+
+#This function takes a list of classes names 'classlst' and x ans y data as 'xlabels' and 'ylst' respectively
+#Then gives back a plot with different classes in one plot
+def draw_comparison_plot(classlst,ylst,xlabels,secondxlab=None,msec=True,log=True):
+    #possible colors for each line
+    color=['r','b','y','c','m','g']
+    #possible line style for each line
+    linestyle=['-','-.','--',':']
+    #adding color and line style to each list of records
+    for i in range(len(ylst)):
+        for j in range(len(ylst[i])):
+            ylst[i][j].append(color[i])
+    for i in range(len(ylst)):
+        for j in range(len(ylst[i])):
+            ylst[i][j].append(linestyle[j])
+    #making each line in the plot
+    for clas in range(len(ylst)):
+        for yax in ylst[clas]:
+            linestyle = yax.pop()
+            color = yax.pop()
+            method = yax.pop()
+            label = classlst[clas] +' '+ method
+            #Checking if there is an exception (having a different x size)
+            if secondxlab is not None and len(yax)==len(secondxlab):
+                plt.plot(secondxlab, yax, color=color, label=label, linestyle=linestyle)
+            else:
+                plt.plot(xlabels, yax,color=color, label=label,linestyle=linestyle)
+            yax.append(method)
+    plt.legend()
+    plt.xlabel("length of inserted random lists")
+    #Changing the second to millisecond if necessary
+    if msec:
+        plt.ylabel("Execution time (msec)")
+    else:
+        plt.ylabel("Execution time (sec)")
+    #Making the title with all the classes
+    title = 'Performance of '
+    for n in range(len(classlst)-1):
+        title += classlst[n] +' and '
+    title += classlst[-1]
+    #Writing the x axis in logarithms if necessary
+    if log:
+        plt.xscale('log')
+    plt.title(title)
+    plt.show()
+
+
+#This function takes a list of lists and numbers of rounds and class names
+#prints a table with all the records respectively
+def print_table(list,rounds,classname):
+    string, nextstring, headers = '|Length|', '| :---: | :', []
+    #going through each class and method and making titles
+    for classnum in range(len(list)):
+        for methodnum in range(len(list[classnum])):
+            header = ''
+            header += classname[classnum]
+            header += ' '+list[classnum][methodnum][-1]
+            headers.append(header)
+    #puting all the titles in one single line to print
+    for head in headers:
+        string += head + '|'
+        #making the titles header by defining next line
+        nextstring += ' :---: |'
+    print(string)
+    print(nextstring)
+    #going through all the records and putting the records related to each length of inserted list in one line then printing it
+    for line in range(len(rounds)):
+        data = '|'+ str(rounds[line]) + '|'
+        for i in range(len(list)):
+            for j in range(len(list[i])):
+                #in case if one class was used with just smaller cases (Bubble sort)
+                if len(list[i][j])-2<line:
+                    data += '-|'
+                else:
+                    data += str(list[i][j][line]) + '|'
+        print(data)
+
+
+#Save the staring time to measure the whole execution time
+starting = time.time()
+
+#We generate a Random list to use the same lists for all Classes
+lists = randomlst(10000,200)
+
+#Measuring the time of Quick sort:
+Quicksort_xlabels, Quicksort_ylabels_values = measure_time(MinMaxQuick,lists,40,getmax=False,getmin=False,msec=True)
+
+#Bubble sort is too slow so I decided to use shorter lists for it
+#so I took only the the first 5 lists
+Bubble_lists = []
+for i in range(5):
+    Bubble_lists.append(lists[i])
+# Measuring the time of Bubble sort:
+Bubblesort_xlabels, Bubblesort_ylabels_values = measure_time(MinMaxBubble,Bubble_lists,1,getmax=False,getmin=False)
+
+#Measuring the time of Binary Tree:
+BinaryTree_xlabels, BinaryTree_ylabels_values = measure_time(MinMaxBinary,lists,40,msec=True)
+
+#Measuring the time of Heap class:
+Heap_xlabels, Heap_ylabels_values = measure_time(MinMaxHeap,lists,40,msec=True)
+
+#Drawing a plot for Quick sort's records in milliseconds and showing in logarithms:
+drawplot(Quicksort_xlabels,Quicksort_ylabels_values,'Quick sort',msec=True,log=True)
+
+#Drawing a plot for Bubble sort's records:
+drawplot(Bubblesort_xlabels,Bubblesort_ylabels_values,'Bubble sort')
+
+#Drawing a plot for Binary Tree's records in milliseconds and showing in logarithms:
+drawplot(BinaryTree_xlabels,BinaryTree_ylabels_values,'Binary Tree',msec=True,log=True)
+
+#Drawing a plot for Heap class's records in milliseconds and showing in logarithms:
+drawplot(Heap_xlabels,Heap_ylabels_values,'Heap class',msec=True,log=True)
+
+#Drawing a plot to compare Binary Tree's adding method:
+draw_comparison_plot(['Binary Tree','Heap class'],[[BinaryTree_ylabels_values[0]],[Heap_ylabels_values[0]]],Heap_xlabels)
+
+#Drawing a plot to compare Binary Tree's geting minimum method:
+draw_comparison_plot(['Binary Tree','Heap class'],[[BinaryTree_ylabels_values[1]],[Heap_ylabels_values[1]]],Heap_xlabels)
+
+#Drawing a plot to compare Binary Tree's geting maximum method:
+draw_comparison_plot(['Binary Tree','Heap class'],[[BinaryTree_ylabels_values[2]],[Heap_ylabels_values[2]]],Heap_xlabels)
+
+#Drawing a plot to compare adding method of Quick sort, Binary Tree and Heap classes:
+draw_comparison_plot(['Quick sort','Binary Tree','Heap class'],[[Quicksort_ylabels_values[0]],[BinaryTree_ylabels_values[0]],[Heap_ylabels_values[0]]],Heap_xlabels)
+
+#Printing a table to access the whole records and data
+print_table([BinaryTree_ylabels_values,Heap_ylabels_values,Quicksort_ylabels_values,Bubblesort_ylabels_values],Heap_xlabels,['Binary Tree','Heap class','Quick sort','Bubble sort'])
+
+#Calculating the whole time of all programs
+whole_time = time.time() - starting
+print('Total execution time: '+str(whole_time))
