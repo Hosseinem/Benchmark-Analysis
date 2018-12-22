@@ -3,7 +3,7 @@ Benchmark analysis of two data structure(Binary Tree, Heap) and two sorting meth
 
 This report has been created to show the result of a benchmark analysis undertaken for a project in computer science in Sapienza University. The goal of this report is to show the result of testing the performances of four programs, two of which are methods to accumulate data and the other two are algorithms for sorting numbers in a given list.
 
-First thing to do is to define four classes to keep the track of minimum and maximum, you can find my codes in the link below:
+The first thing to do is to define four classes to keep the track of minimum and maximum, you can find my codes in the link below:
 
 https://github.com/Hosseinem/Third-assignment/blob/master/Codes%20of%20classes
 
@@ -66,12 +66,12 @@ I organized the result of the Benchmark analysis in the table below:
 |9610|85.46692132949829|28.99869680404663|42.7324652671814|28.198570013046265|8.503472805023193|8.202534914016724|36.905014514923096|-|
 |9810|85.20827889442444|32.21052289009094|46.89839482307434|19.8022723197937|5.8979034423828125|7.6024651527404785|33.406275510787964|-|
 
-The codes of get_min and get_max methods in Bubble sort and Quick sort are the same and the time to get the firts or last element after sorting them is almost zero, so I just measured the add method which illustrates the proper alteration of the performance of sorting algorithms while increasing the length of the given lists.
+The codes of get_min and get_max methods in Bubble sort and Quick sort are the same and the time to get the first or last element after sorting them is almost zero, so I just measured the add method which illustrates the proper alteration of the performance of sorting algorithms while increasing the length of the given lists.
 
 
 <p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/1.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/2.png" width = "400" height = "320"/>
 
-Consequently, by increasing the length of the lists,the Bubble sort is gets much more slower.As a matter of fact, Bubble sort was too slow that I had to put it in seconds instead of milliseconds and also put only the first 5 lists, you can see the major difference in the figure below(Note that Bubble sort's line is in the middle just for comparison, the scale is different both in time and length of the lists):
+Consequently, by increasing the length of the lists, the Bubble sort is geting much slower. As a matter of fact, Bubble sort was too slow that I had to put it in seconds instead of milliseconds and also put only the first 5 lists, you can see the major difference in the figure below(Note that Bubble sort's line is in the middle just for comparison, the scale is different both in time and length of the lists):
 
 <p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/9.png" width = "550" height = "350"/>
 
@@ -86,7 +86,7 @@ In comparison, Heap performance is much faster than Binary Tree due to the fact 
 
 
 
-In conclusion, the comparison of the three programs all together that ilustrates the fact that Heap is the fastest and then Quick sort and Binary Tree and finally Bubble sort is the slowest one with a major difference.
+In conclusion, the comparison of the three programs all together that illustrates the fact that Heap is the fastest and then Quick sort and Binary Tree and finally Bubble sort is the slowest one with a major difference.
 
 
 <p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/8.png" width = "450" height = "350"/>
