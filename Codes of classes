@@ -1,0 +1,114 @@
+import random, time, heapq
+
+#Class for keeping track of minimum and maximum in a list using Bubble sort for ordering it
+class MinMaxBubble(object):
+
+    def __init__(self):
+        self.content = []
+
+    def Bubble_Sort(self):
+        for passnum in range(len(self.content) - 1, 0, -1):
+            for i in range(passnum):
+                if self.content[i] > self.content[i + 1]:
+                    temp = self.content[i]
+                    self.content[i] = self.content[i + 1]
+                    self.content[i + 1] = temp
+
+    def add(self, value):
+        self.content.append(value)
+        self.Bubble_Sort()
+
+    def get_min(self):
+        return self.content[0]
+
+    def get_max(self):
+        return self.content[-1]
+
+
+#Quick sort codes:
+def QuickSort(lst):
+    if len(lst) <= 1:
+        return lst
+    else:
+        pivot = lst.pop(0)
+        left, right = [], []
+        for i in lst:
+            if i > pivot:
+                right.append(i)
+            else:
+                left.append(i)
+        return QuickSort(left) + [pivot] + QuickSort(right)
+
+#Class for keeping track of minimum and maximum in a list using Quick sort for ordering it
+class MinMaxQuick(object):
+
+    def __init__(self):
+        self.content = []
+
+    def add(self, value):
+        self.content.append(value)
+        QuickSort(self.content)
+
+    def get_min(self):
+        return self.content[0]
+
+    def get_max(self):
+        return self.content[-1]
+
+
+##Class for keeping track of minimum and maximum in a Binary tree order
+class MinMaxBinary(object):
+
+    def __init__(self,data=None):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def add(self, data):
+        if self.data == None:
+            self.data = data
+# Compare the new value with the parent node
+        elif self.data:
+            if data < self.data:
+                if self.left is None:
+                    self.left = MinMaxBinary(data)
+                else:
+                    self.left.add(data)
+            elif data > self.data:
+                if self.right is None:
+                    self.right = MinMaxBinary(data)
+                else:
+                    self.right.add(data)
+        else:
+            self.data = data
+
+    def get_min(self):
+        min = self.data
+        if self.left != None:
+            min = self.left.get_min()
+        return min
+
+    def get_max(self):
+        max = self.data
+        if self.right != None:
+            max = self.right.get_max()
+        return max
+
+
+#Class for keeping track of minimum and maximum in a Heap order
+class MinMaxHeap(object):
+
+    def __init__(self):
+        self.content_min = []
+        self.content_max = []
+
+    def add(self, value):
+        heapq.heappush(self.content_min,value)
+        heapq.heappush(self.content_max,-value)
+
+
+    def get_min(self):
+        return self.content_min[0]
+
+    def get_max(self):
+        return -self.content_max[0]
