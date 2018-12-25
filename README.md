@@ -68,28 +68,27 @@ I organized the result of the Benchmark analysis in the table below:
 
 The codes of get_min and get_max methods in Bubble sort and Quick sort are the same and the time to get the first or last element after sorting them is almost zero, so I just measured the add method which illustrates the proper alteration of the performance of sorting algorithms while increasing the length of the given lists.
 
-
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/1.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/2.png" width = "400" height = "320"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/1.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/2.png" width = "400" height = "320"/>
 
 Consequently, by increasing the length of the lists, the Bubble sort is geting much slower. As a matter of fact, Bubble sort was too slow that I had to put it in seconds instead of milliseconds and also put only the first 5 lists, you can see the major difference in the figure below(Note that Bubble sort's line is in the middle just for comparison, the scale is different both in time and length of the lists):
 
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/9.png" width = "550" height = "350"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/9.png" width = "550" height = "350"/>
 
 
 In the following figures you can see the performances of Binary Tree and Heap:
 
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/3.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/4.png" width = "400" height = "320"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/3.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/4.png" width = "400" height = "320"/>
 
 In comparison, Heap performance is much faster than Binary Tree due to the fact that in Heap we add the new element at the last position and it doesn't have any left or right ordering such as Binary tree.
 
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/5.png" width = "280" height = "230"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/6.png" width = "280" height = "230"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/7.png" width = "280" height = "230"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/5.png" width = "280" height = "230"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/6.png" width = "280" height = "230"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/7.png" width = "280" height = "230"/>
 
 
 
 In conclusion, the comparison of the three programs all together that illustrates the fact that Heap is the fastest and then Quick sort and Binary Tree and finally Bubble sort is the slowest one with a major difference.
 
 
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/8.png" width = "450" height = "350"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/8.png" width = "450" height = "350"/>
 
 
 # System information:
