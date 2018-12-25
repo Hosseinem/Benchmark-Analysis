@@ -68,7 +68,7 @@ I organized the result of the Benchmark analysis in the table below:
 
 The codes of get_min and get_max methods in Bubble sort and Quick sort are the same and the time to get the first or last element after sorting them is almost zero, so I just measured the add method which illustrates the proper alteration of the performance of sorting algorithms while increasing the length of the given lists.
 
-<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/1.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/2.png" width = "400" height = "320"/>
+<p align="center"><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/1.png" width = "400" height = "320"/><img src = "https://github.com/Hosseinem/Third-assignment/blob/master/Figures/2.png" width = "400" height = "320"/>
 
 Consequently, by increasing the length of the lists, the Bubble sort is geting much slower. As a matter of fact, Bubble sort was too slow that I had to put it in seconds instead of milliseconds and also put only the first 5 lists, you can see the major difference in the figure below(Note that Bubble sort's line is in the middle just for comparison, the scale is different both in time and length of the lists):
 
